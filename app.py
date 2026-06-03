@@ -194,7 +194,7 @@ def main():
         st.info("업로드한 HWPX 파일의 이미지를 일괄 압축하여 용량을 줄입니다.")
 
         uploaded = st.file_uploader(
-            "HWPX 파일 선택", type=["hwpx"], key="compress_upload"
+            "HWPX 파일 선택", type=["hwpx", "hwp"], key="compress_upload"
         )
 
         size_option = st.radio(
@@ -260,7 +260,7 @@ def main():
         st.info("업로드한 HWPX 파일에서 이미지를 모두 꺼내 ZIP 파일로 다운로드합니다.")
 
         uploaded2 = st.file_uploader(
-            "HWPX 파일 선택", type=["hwpx"], key="extract_upload"
+            "HWPX 파일 선택", type=["hwpx", "hwp"], key="extract_upload"
         )
 
         if uploaded2 and uploaded2.name.lower().endswith('.hwp') and not uploaded2.name.lower().endswith('.hwpx'):
