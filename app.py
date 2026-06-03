@@ -212,7 +212,14 @@ def main():
             key="size_radio"
         )
 
-        if uploaded and st.button("🗜️ 압축 시작", type="primary", key="compress_btn"):
+        if uploaded and uploaded.name.lower().endswith('.hwp') and not uploaded.name.lower().endswith('.hwpx'):
+            st.error(
+                "⚠️ HWP 파일은 지원하지 않습니다.\n\n"
+                "**HWPX 파일로 변환 후 업로드해 주세요.**\n\n"
+                "한컴오피스에서: `파일` → `다른 이름으로 저장` → 파일 형식을 **HWPX**로 선택 후 저장"
+            )
+
+        if uploaded and uploaded.name.lower().endswith('.hwpx') and st.button("🗜️ 압축 시작", type="primary", key="compress_btn"):
             hwpx_bytes = uploaded.read()
             original_size = len(hwpx_bytes)
 
@@ -256,7 +263,14 @@ def main():
             "HWPX 파일 선택", type=["hwpx"], key="extract_upload"
         )
 
-        if uploaded2 and st.button("📦 이미지 추출 시작", type="primary", key="extract_btn"):
+        if uploaded2 and uploaded2.name.lower().endswith('.hwp') and not uploaded2.name.lower().endswith('.hwpx'):
+            st.error(
+                "⚠️ HWP 파일은 지원하지 않습니다.\n\n"
+                "**HWPX 파일로 변환 후 업로드해 주세요.**\n\n"
+                "한컴오피스에서: `파일` → `다른 이름으로 저장` → 파일 형식을 **HWPX**로 선택 후 저장"
+            )
+
+        if uploaded2 and uploaded2.name.lower().endswith('.hwpx') and st.button("📦 이미지 추출 시작", type="primary", key="extract_btn"):
             hwpx_bytes = uploaded2.read()
 
             progress2 = st.progress(0, text="준비 중...")
@@ -280,7 +294,10 @@ def main():
                 )
 
     st.divider()
+    st.caption("⚠️ HWP 파일은 지원하지 않습니다. HWPX 파일로 업로드해 주세요.")
+    st.caption("⚠️ 민감한 정보가 담긴 문서는 업로드하지 마세요.")
     st.caption("⚠️ 중요한 문서는 반드시 원본 백업 후 사용하세요.")
+    st.caption("⚠️ 200MB 이상 파일은 업로드가 되지 않을 수 있습니다.")
 
 
 if __name__ == "__main__":
